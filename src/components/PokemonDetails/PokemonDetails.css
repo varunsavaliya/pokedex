@@ -1,0 +1,5 @@
+.pokemon-image{
+    width: 300px !important;
+    height: 300px;
+    object-fit: contain;
+}
