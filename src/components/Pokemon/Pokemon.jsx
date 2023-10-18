@@ -8,7 +8,7 @@ function Pokemon({ name, image, id }) {
                 <div className="card pokemon-wrapper">
                     <img src={image} className="card-img-top pokemon-img p-3" alt="..." />
                     <div className="card-body">
-                        <h5 className="card-title pokemon-name">{name}</h5>
+                        <h5 className="card-title name">{name}</h5>
                         <Link to={`/pokemon/${id}`} className="btn btn-primary">Read more</Link>
                     </div>
                 </div>
