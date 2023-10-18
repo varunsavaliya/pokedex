@@ -61,7 +61,7 @@ function PokemonDetails() {
                     data-bs-interval="10000"
                   >
                     <img
-                      src={i}
+                      src={i ? i : '../../src/assets/default-poke.png'}
                       className="pokemon-image d-block w-100"
                       alt={`Pokemon ${index + 1}`}
                     />
@@ -107,7 +107,7 @@ function PokemonDetails() {
                   </span>
                 ))}
             </div>
-            <PokemonList pagination={false} url={pokemonDetailStates.pokemon.types ? pokemonDetailStates.pokemon.types[0].type.url : ''} />
+            <PokemonList pagination={false} pokemonId={id} url={pokemonDetailStates.pokemon.types ? pokemonDetailStates.pokemon.types[0].type.url : ''} />
           </div>
         </>
       )}

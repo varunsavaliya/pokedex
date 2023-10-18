@@ -2,8 +2,8 @@ import "./PokemonList.css";
 import Pokemon from "../Pokemon/Pokemon";
 import usePokedexStates from "../../hooks/usePokedexStates";
 
-function PokemonList({ pagination = true, url = "" }) {
-  const [pokedexState, setPokedexState] = usePokedexStates(url);
+function PokemonList({ pagination = true, url = "", pokemonId=0 }) {
+  const [pokedexState, setPokedexState] = usePokedexStates(url,pokemonId);
   return (
     <>
       <div className="pokemon-list-wrapper row g-3 my-3">
@@ -12,7 +12,7 @@ function PokemonList({ pagination = true, url = "" }) {
         ) : (
           <>
             {pokedexState.pokemonList.map((p) => (
-              <Pokemon name={p.name} image={p.image} id={p.id} key={p.id} />
+              <Pokemon name={p.name} image={p.image ? p.image : '../../src/assets/default-poke.png'} id={p.id} key={p.id} />
             ))}
             {pagination && (
               <>
