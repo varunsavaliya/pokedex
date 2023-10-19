@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function usePokedexStates(url, pokemonId) {
+function usePokedexStates(url = undefined, pokemonId = undefined) {
   const [pokedexState, setPokedexState] = useState({
     pokemonList: [],
     isLoading: true,
     prev: "",
     next: "",
-    pokedexUrl: url == "" ? "https://pokeapi.co/api/v2/pokemon/" : url,
+    pokedexUrl: url ? url : "https://pokeapi.co/api/v2/pokemon/",
+    searchText: "",
   });
 
   async function getPokemons() {
@@ -20,6 +21,7 @@ function usePokedexStates(url, pokemonId) {
     }));
 
     // result have 20 pokemons name and url
+    // filtering according recommended pokemons or list page
     let pokemonResults;
     if (url) {
       pokemonResults = response.data.pokemon;
@@ -33,6 +35,14 @@ function usePokedexStates(url, pokemonId) {
       pokemonResults = pokemonResults.slice(0, 4);
     } else {
       pokemonResults = response.data.results;
+    }
+
+    // pokemons according searching
+    if (pokedexState.searchText) {
+      pokemonResults = pokemonResults.filter((p) =>
+        p.name.includes(pokedexState.searchText.toLowerCase())
+      );
+      console.log(pokemonResults);
     }
 
     // promise array of 20 pokemons
@@ -73,7 +83,7 @@ function usePokedexStates(url, pokemonId) {
 
   useEffect(() => {
     getPokemons();
-  }, [pokedexState.pokedexUrl]);
+  }, [pokedexState.pokedexUrl, pokedexState.searchText]);
 
   return [pokedexState, setPokedexState];
 }
