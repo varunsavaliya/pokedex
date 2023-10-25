@@ -1,21 +1,18 @@
-import usePokedexStates from "../../hooks/usePokedexStates";
+import { useState } from "react";
+import PokemonDetails from "../PokemonDetails/PokemonDetails";
 import PokemonList from "../PokemonList/PokemonList";
 import Search from "../Search/Search";
 import "./Pokedex.css";
 
 function Pokedex() {
-  const [pokedexState, setPokedexState] = usePokedexStates();
+  const [searchText, setSearchText] = useState('');
 
-  function handleSearch(searchText) {
-    setPokedexState((state)=>( {...state, searchText: searchText }));
-  }
   return (
     <div className="pokedex-wrapper d-flex flex-column align-items-center justify-content-center">
       <Search
-        searchText={pokedexState.searchText}
-        handleSearch={handleSearch}
+        handleSearch={setSearchText}
       />
-      <PokemonList />
+      { !searchText ? <PokemonList /> : <PokemonDetails key={searchText} pokemonName={searchText} />}
     </div>
   );
 }

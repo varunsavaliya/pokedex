@@ -4,9 +4,9 @@ import { FaAngleLeft } from "react-icons/fa6";
 import "./PokemonDetails.css";
 import usePokemonDetailStates from "../../hooks/usePokemonDetailStates";
 
-function PokemonDetails() {
+function PokemonDetails({pokemonName}) {
   const { id } = useParams();
-  const [pokemonDetailStates] = usePokemonDetailStates(id);
+  const [pokemonDetailStates] = usePokemonDetailStates(id, pokemonName);
   return (
     <>
       {pokemonDetailStates.isLoading ? (

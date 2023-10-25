@@ -8,7 +8,6 @@ function usePokedexStates(url = undefined, pokemonId = undefined) {
     prev: "",
     next: "",
     pokedexUrl: url ? url : "https://pokeapi.co/api/v2/pokemon/",
-    searchText: "",
   });
 
   async function getPokemons() {
